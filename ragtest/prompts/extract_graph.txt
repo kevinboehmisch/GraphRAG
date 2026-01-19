@@ -1,0 +1,36 @@
+-Goal-
+Given a text document and a list of entity types, identify all entities of those types from the text and all relationships among them.
+
+-Steps-
+1. Identify all entities. For each entity, extract:
+- entity_name: Name of the entity, capitalized
+- entity_type: One of the following types: [{entity_types}]
+- entity_description: Comprehensive description of the entity's attributes and activities
+Format: ("entity", "entity_name", "entity_type", "entity_description")
+
+2. From the entities identified in step 1, identify all relationships. For each relationship, extract:
+- source_entity: name of the source entity
+- target_entity: name of the target entity
+- relationship_description: explanation as to why they are related
+- relationship_strength: a numeric score (1-10)
+Format: ("relationship", "source_entity", "target_entity", "relationship_description", relationship_strength)
+
+3. Output as a single list. NEVER add explanations. ONLY output the tuples.
+
+-Examples-
+Example 1:
+Text:
+Microsoft was founded by Bill Gates and Paul Allen. They launched Windows in 1985.
+Output:
+("entity", "Microsoft", "ORGANIZATION", "A technology company founded by Bill Gates and Paul Allen.")
+("entity", "Bill Gates", "PERSON", "Co-founder of Microsoft.")
+("entity", "Paul Allen", "PERSON", "Co-founder of Microsoft.")
+("entity", "Windows", "PRODUCT", "Operating system launched by Microsoft in 1985.")
+("relationship", "Bill Gates", "Microsoft", "Co-founder of the company.", 10)
+("relationship", "Paul Allen", "Microsoft", "Co-founder of the company.", 10)
+("relationship", "Microsoft", "Windows", "Launched the product.", 8)
+
+-Real Data-
+Entity_types: {entity_types}
+Text: {input_text}
+Output:

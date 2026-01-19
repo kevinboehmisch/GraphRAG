@@ -1,0 +1,25 @@
+*** INTERNES MEMO: SOFTWARE-ARCHITEKTUR ***
+Datum: 12. Januar 2026
+Betreff: Projektzuständigkeiten
+
+Hiermit wird bestätigt, dass das "Team Blau" die volle technische Verantwortung für das neue Projekt "Chimera" übernimmt. Teamleiterin ist Sarah Müller. Alle Anfragen bezüglich Chimera gehen ab sofort an Team Blau.
+
+---
+
+*** TECHNISCHE DOKUMENTATION: PROJEKT CHIMERA ***
+Stand: 13. Januar 2026
+Komponente: Backend-Infrastruktur
+
+Für die Datenverarbeitung im Projekt Chimera setzen wir auf die bewährte Bibliothek "ZetaCore". Aus Kompatibilitätsgründen nutzen wir strikt die Version 1.0.5, da neuere Versionen breaking changes haben. Die Integration wurde heute abgeschlossen.
+
+---
+
+*** SECURITY ALERT - CERT BUND ***
+Datum: 15. Januar 2026
+Warnstufe: ROT / KRITISCH
+ID: CVE-2026-9999
+
+Es wurde eine kritische Remote-Code-Execution (RCE) Lücke in der Bibliothek "ZetaCore" entdeckt.
+Betroffene Versionen: Alle Versionen der 1.0.x Reihe (1.0.0 bis 1.0.9).
+Handlungsempfehlung: Sofortiges Update auf Version 2.0.
+Angreifer können über diese Lücke die volle Kontrolle über den Server übernehmen.

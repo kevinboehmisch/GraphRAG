@@ -1,0 +1,1164 @@
+2026-01-15 13:31:25.0044 - INFO - graphrag.index.validate_config - LLM Config Params Validated
+2026-01-15 13:31:27.0050 - INFO - graphrag.index.validate_config - Embedding LLM Config Params Validated
+2026-01-15 13:31:27.0050 - INFO - graphrag.cli.index - Starting pipeline run. False
+2026-01-15 13:31:27.0050 - INFO - graphrag.cli.index - Using default configuration: {
+    "root_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest",
+    "models": {
+        "default_chat_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "chat",
+            "model_provider": "openai",
+            "model": "llama3:8b",
+            "encoding_model": "",
+            "api_base": "http://localhost:11434/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": true,
+            "request_timeout": 180.0,
+            "tokens_per_minute": 100000,
+            "requests_per_minute": 20,
+            "rate_limit_strategy": "static",
+            "retry_strategy": "exponential_backoff",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 1,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": null,
+            "temperature": 0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        },
+        "default_embedding_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "embedding",
+            "model_provider": "openai",
+            "model": "mxbai-embed-large:latest",
+            "encoding_model": "",
+            "api_base": "http://localhost:11434/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": null,
+            "request_timeout": 180.0,
+            "tokens_per_minute": 100000,
+            "requests_per_minute": 20,
+            "rate_limit_strategy": "static",
+            "retry_strategy": "exponential_backoff",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 1,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": null,
+            "temperature": 0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        }
+    },
+    "input": {
+        "storage": {
+            "type": "file",
+            "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\input",
+            "storage_account_blob_url": null,
+            "cosmosdb_account_url": null
+        },
+        "file_type": "text",
+        "encoding": "utf-8",
+        "file_pattern": ".*\\.txt$",
+        "file_filter": null,
+        "text_column": "text",
+        "title_column": null,
+        "metadata": null
+    },
+    "chunks": {
+        "size": 1200,
+        "overlap": 100,
+        "group_by_columns": [
+            "id"
+        ],
+        "strategy": "tokens",
+        "encoding_model": "cl100k_base",
+        "prepend_metadata": false,
+        "chunk_size_includes_metadata": false
+    },
+    "output": {
+        "type": "file",
+        "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "outputs": null,
+    "update_index_output": {
+        "type": "file",
+        "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\update_output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "cache": {
+        "type": "file",
+        "base_dir": "cache",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "reporting": {
+        "type": "file",
+        "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\logs",
+        "storage_account_blob_url": null
+    },
+    "vector_store": {
+        "default_vector_store": {
+            "type": "lancedb",
+            "db_uri": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\output\\lancedb",
+            "url": null,
+            "audience": null,
+            "container_name": "==== REDACTED ====",
+            "database_name": null,
+            "overwrite": true,
+            "embeddings_schema": {}
+        }
+    },
+    "workflows": null,
+    "embed_text": {
+        "model_id": "default_embedding_model",
+        "vector_store_id": "default_vector_store",
+        "batch_size": 16,
+        "batch_max_tokens": 8191,
+        "names": [
+            "entity.description",
+            "community.full_content",
+            "text_unit.text"
+        ],
+        "strategy": null
+    },
+    "extract_graph": {
+        "model_id": "default_chat_model",
+        "prompt": "prompts/extract_graph.txt",
+        "entity_types": [
+            "organization",
+            "person",
+            "geo",
+            "event"
+        ],
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "summarize_descriptions": {
+        "model_id": "default_chat_model",
+        "prompt": "prompts/summarize_descriptions.txt",
+        "max_length": 500,
+        "max_input_tokens": 4000,
+        "strategy": null
+    },
+    "extract_graph_nlp": {
+        "normalize_edge_weights": true,
+        "text_analyzer": {
+            "extractor_type": "regex_english",
+            "model_name": "en_core_web_md",
+            "max_word_length": 15,
+            "word_delimiter": " ",
+            "include_named_entities": true,
+            "exclude_nouns": [
+                "stuff",
+                "thing",
+                "things",
+                "bunch",
+                "bit",
+                "bits",
+                "people",
+                "person",
+                "okay",
+                "hey",
+                "hi",
+                "hello",
+                "laughter",
+                "oh"
+            ],
+            "exclude_entity_tags": [
+                "DATE"
+            ],
+            "exclude_pos_tags": [
+                "DET",
+                "PRON",
+                "INTJ",
+                "X"
+            ],
+            "noun_phrase_tags": [
+                "PROPN",
+                "NOUNS"
+            ],
+            "noun_phrase_grammars": {
+                "PROPN,PROPN": "PROPN",
+                "NOUN,NOUN": "NOUNS",
+                "NOUNS,NOUN": "NOUNS",
+                "ADJ,ADJ": "ADJ",
+                "ADJ,NOUN": "NOUNS"
+            }
+        },
+        "concurrent_requests": 25,
+        "async_mode": "threaded"
+    },
+    "prune_graph": {
+        "min_node_freq": 2,
+        "max_node_freq_std": null,
+        "min_node_degree": 1,
+        "max_node_degree_std": null,
+        "min_edge_weight_pct": 40.0,
+        "remove_ego_nodes": true,
+        "lcc_only": false
+    },
+    "cluster_graph": {
+        "max_cluster_size": 10,
+        "use_lcc": true,
+        "seed": 3735928559
+    },
+    "extract_claims": {
+        "enabled": false,
+        "model_id": "default_chat_model",
+        "prompt": "prompts/extract_claims.txt",
+        "description": "Any claims or facts that could be relevant to information discovery.",
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "community_reports": {
+        "model_id": "default_chat_model",
+        "graph_prompt": "prompts/community_report_graph.txt",
+        "text_prompt": "prompts/community_report_text.txt",
+        "max_length": 2000,
+        "max_input_length": 8000,
+        "strategy": null
+    },
+    "embed_graph": {
+        "enabled": false,
+        "dimensions": 1536,
+        "num_walks": 10,
+        "walk_length": 40,
+        "window_size": 2,
+        "iterations": 3,
+        "random_seed": 597832,
+        "use_lcc": true
+    },
+    "umap": {
+        "enabled": false
+    },
+    "snapshots": {
+        "embeddings": false,
+        "graphml": false,
+        "raw_graph": false
+    },
+    "local_search": {
+        "prompt": "prompts/local_search_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "text_unit_prop": 0.5,
+        "community_prop": 0.15,
+        "conversation_history_max_turns": 5,
+        "top_k_entities": 10,
+        "top_k_relationships": 10,
+        "max_context_tokens": 12000
+    },
+    "global_search": {
+        "map_prompt": "prompts/global_search_map_system_prompt.txt",
+        "reduce_prompt": "prompts/global_search_reduce_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "knowledge_prompt": "prompts/global_search_knowledge_system_prompt.txt",
+        "max_context_tokens": 12000,
+        "data_max_tokens": 12000,
+        "map_max_length": 1000,
+        "reduce_max_length": 2000,
+        "dynamic_search_threshold": 1,
+        "dynamic_search_keep_parent": false,
+        "dynamic_search_num_repeats": 1,
+        "dynamic_search_use_summary": false,
+        "dynamic_search_max_level": 2
+    },
+    "drift_search": {
+        "prompt": "prompts/drift_search_system_prompt.txt",
+        "reduce_prompt": "prompts/drift_search_reduce_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "data_max_tokens": 12000,
+        "reduce_max_tokens": null,
+        "reduce_temperature": 0,
+        "reduce_max_completion_tokens": null,
+        "concurrency": 32,
+        "drift_k_followups": 20,
+        "primer_folds": 5,
+        "primer_llm_max_tokens": 12000,
+        "n_depth": 3,
+        "local_search_text_unit_prop": 0.9,
+        "local_search_community_prop": 0.1,
+        "local_search_top_k_mapped_entities": 10,
+        "local_search_top_k_relationships": 10,
+        "local_search_max_data_tokens": 12000,
+        "local_search_temperature": 0,
+        "local_search_top_p": 1,
+        "local_search_n": 1,
+        "local_search_llm_max_gen_tokens": null,
+        "local_search_llm_max_gen_completion_tokens": null
+    },
+    "basic_search": {
+        "prompt": "prompts/basic_search_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "k": 10,
+        "max_context_tokens": 12000
+    }
+}
+2026-01-15 13:31:27.0052 - INFO - graphrag.api.index - Initializing indexing pipeline...
+2026-01-15 13:31:27.0052 - INFO - graphrag.index.workflows.factory - Creating pipeline with workflows: ['load_input_documents', 'create_base_text_units', 'create_final_documents', 'extract_graph', 'finalize_graph', 'extract_covariates', 'create_communities', 'create_final_text_units', 'create_community_reports', 'generate_text_embeddings']
+2026-01-15 13:31:27.0052 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\input
+2026-01-15 13:31:27.0053 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\output
+2026-01-15 13:31:27.0053 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest
+2026-01-15 13:31:27.0054 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\cache
+2026-01-15 13:31:27.0055 - INFO - graphrag.index.run.run_pipeline - Running standard indexing.
+2026-01-15 13:31:27.0055 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at 
+2026-01-15 13:31:27.0059 - INFO - graphrag.index.run.run_pipeline - Executing pipeline...
+2026-01-15 13:31:27.0059 - INFO - graphrag.index.input.factory - loading input from root_dir=C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\input
+2026-01-15 13:31:27.0059 - INFO - graphrag.index.input.factory - Loading Input InputFileType.text
+2026-01-15 13:31:27.0059 - INFO - graphrag.storage.file_pipeline_storage - search C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\input for files matching .*\.txt$
+2026-01-15 13:31:27.0062 - INFO - graphrag.index.input.util - Found 1 InputFileType.text files, loading 1
+2026-01-15 13:31:27.0062 - INFO - graphrag.index.input.util - Total number of unfiltered InputFileType.text rows: 1
+2026-01-15 13:31:27.0062 - INFO - graphrag.index.workflows.load_input_documents - Final # of rows loaded: 1
+2026-01-15 13:31:27.0083 - INFO - graphrag.api.index - Workflow load_input_documents completed successfully
+2026-01-15 13:31:27.0093 - INFO - graphrag.index.workflows.create_base_text_units - Workflow started: create_base_text_units
+2026-01-15 13:31:27.0095 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2026-01-15 13:31:27.0104 - INFO - graphrag.index.workflows.create_base_text_units - Starting chunking process for 1 documents
+2026-01-15 13:31:27.0107 - INFO - graphrag.index.workflows.create_base_text_units - chunker progress:  1/1
+2026-01-15 13:31:27.0144 - INFO - graphrag.index.workflows.create_base_text_units - Workflow completed: create_base_text_units
+2026-01-15 13:31:27.0144 - INFO - graphrag.api.index - Workflow create_base_text_units completed successfully
+2026-01-15 13:31:27.0148 - INFO - graphrag.index.workflows.create_final_documents - Workflow started: create_final_documents
+2026-01-15 13:31:27.0149 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2026-01-15 13:31:27.0153 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2026-01-15 13:31:27.0166 - INFO - graphrag.index.workflows.create_final_documents - Workflow completed: create_final_documents
+2026-01-15 13:31:27.0166 - INFO - graphrag.api.index - Workflow create_final_documents completed successfully
+2026-01-15 13:31:27.0170 - INFO - graphrag.index.workflows.extract_graph - Workflow started: extract_graph
+2026-01-15 13:31:27.0171 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2026-01-15 13:31:27.0183 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\cache\extract_graph
+2026-01-15 13:31:38.0913 - INFO - graphrag.logger.progress - extract graph progress: 1/1
+2026-01-15 13:31:38.0913 - ERROR - graphrag.index.run.run_pipeline - error running workflow extract_graph
+Traceback (most recent call last):
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\run\run_pipeline.py", line 121, in _run_pipeline
+    result = await workflow_function(config, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\workflows\extract_graph.py", line 50, in run_workflow
+    entities, relationships, raw_entities, raw_relationships = await extract_graph(
+                                                               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\workflows\extract_graph.py", line 95, in extract_graph
+    extracted_entities, extracted_relationships = await extractor(
+                                                  ^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\operations\extract_graph\extract_graph.py", line 79, in extract_graph
+    entities = _merge_entities(entity_dfs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\operations\extract_graph\extract_graph.py", line 103, in _merge_entities
+    all_entities.groupby(["title", "type"], sort=False)
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\pandas\core\frame.py", line 9210, in groupby
+    return DataFrameGroupBy(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1331, in __init__
+    grouper, exclusions, obj = get_grouper(
+                               ^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\pandas\core\groupby\grouper.py", line 1043, in get_grouper
+    raise KeyError(gpr)
+KeyError: 'title'
+2026-01-15 13:31:38.0918 - ERROR - graphrag.api.index - Workflow extract_graph completed with errors
+2026-01-15 13:31:38.0919 - ERROR - graphrag.cli.index - Errors occurred during the pipeline run, see logs for more details.
+2026-01-15 13:39:23.0048 - INFO - graphrag.index.validate_config - LLM Config Params Validated
+2026-01-15 13:39:24.0289 - INFO - graphrag.index.validate_config - Embedding LLM Config Params Validated
+2026-01-15 13:39:24.0289 - INFO - graphrag.cli.index - Starting pipeline run. False
+2026-01-15 13:39:24.0290 - INFO - graphrag.cli.index - Using default configuration: {
+    "root_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest",
+    "models": {
+        "default_chat_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "chat",
+            "model_provider": "openai",
+            "model": "llama3:8b",
+            "encoding_model": "",
+            "api_base": "http://localhost:11434/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": false,
+            "request_timeout": 180.0,
+            "tokens_per_minute": 100000,
+            "requests_per_minute": 20,
+            "rate_limit_strategy": "static",
+            "retry_strategy": "exponential_backoff",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 1,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": null,
+            "temperature": 0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        },
+        "default_embedding_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "embedding",
+            "model_provider": "openai",
+            "model": "mxbai-embed-large:latest",
+            "encoding_model": "",
+            "api_base": "http://localhost:11434/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": null,
+            "request_timeout": 180.0,
+            "tokens_per_minute": 100000,
+            "requests_per_minute": 20,
+            "rate_limit_strategy": "static",
+            "retry_strategy": "exponential_backoff",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 1,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": null,
+            "temperature": 0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        }
+    },
+    "input": {
+        "storage": {
+            "type": "file",
+            "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\input",
+            "storage_account_blob_url": null,
+            "cosmosdb_account_url": null
+        },
+        "file_type": "text",
+        "encoding": "utf-8",
+        "file_pattern": ".*\\.txt$",
+        "file_filter": null,
+        "text_column": "text",
+        "title_column": null,
+        "metadata": null
+    },
+    "chunks": {
+        "size": 1200,
+        "overlap": 100,
+        "group_by_columns": [
+            "id"
+        ],
+        "strategy": "tokens",
+        "encoding_model": "cl100k_base",
+        "prepend_metadata": false,
+        "chunk_size_includes_metadata": false
+    },
+    "output": {
+        "type": "file",
+        "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "outputs": null,
+    "update_index_output": {
+        "type": "file",
+        "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\update_output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "cache": {
+        "type": "file",
+        "base_dir": "cache",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "reporting": {
+        "type": "file",
+        "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\logs",
+        "storage_account_blob_url": null
+    },
+    "vector_store": {
+        "default_vector_store": {
+            "type": "lancedb",
+            "db_uri": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\output\\lancedb",
+            "url": null,
+            "audience": null,
+            "container_name": "==== REDACTED ====",
+            "database_name": null,
+            "overwrite": true,
+            "embeddings_schema": {}
+        }
+    },
+    "workflows": null,
+    "embed_text": {
+        "model_id": "default_embedding_model",
+        "vector_store_id": "default_vector_store",
+        "batch_size": 16,
+        "batch_max_tokens": 8191,
+        "names": [
+            "entity.description",
+            "community.full_content",
+            "text_unit.text"
+        ],
+        "strategy": null
+    },
+    "extract_graph": {
+        "model_id": "default_chat_model",
+        "prompt": "prompts/extract_graph.txt",
+        "entity_types": [
+            "organization",
+            "person",
+            "geo",
+            "event"
+        ],
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "summarize_descriptions": {
+        "model_id": "default_chat_model",
+        "prompt": "prompts/summarize_descriptions.txt",
+        "max_length": 500,
+        "max_input_tokens": 4000,
+        "strategy": null
+    },
+    "extract_graph_nlp": {
+        "normalize_edge_weights": true,
+        "text_analyzer": {
+            "extractor_type": "regex_english",
+            "model_name": "en_core_web_md",
+            "max_word_length": 15,
+            "word_delimiter": " ",
+            "include_named_entities": true,
+            "exclude_nouns": [
+                "stuff",
+                "thing",
+                "things",
+                "bunch",
+                "bit",
+                "bits",
+                "people",
+                "person",
+                "okay",
+                "hey",
+                "hi",
+                "hello",
+                "laughter",
+                "oh"
+            ],
+            "exclude_entity_tags": [
+                "DATE"
+            ],
+            "exclude_pos_tags": [
+                "DET",
+                "PRON",
+                "INTJ",
+                "X"
+            ],
+            "noun_phrase_tags": [
+                "PROPN",
+                "NOUNS"
+            ],
+            "noun_phrase_grammars": {
+                "PROPN,PROPN": "PROPN",
+                "NOUN,NOUN": "NOUNS",
+                "NOUNS,NOUN": "NOUNS",
+                "ADJ,ADJ": "ADJ",
+                "ADJ,NOUN": "NOUNS"
+            }
+        },
+        "concurrent_requests": 25,
+        "async_mode": "threaded"
+    },
+    "prune_graph": {
+        "min_node_freq": 2,
+        "max_node_freq_std": null,
+        "min_node_degree": 1,
+        "max_node_degree_std": null,
+        "min_edge_weight_pct": 40.0,
+        "remove_ego_nodes": true,
+        "lcc_only": false
+    },
+    "cluster_graph": {
+        "max_cluster_size": 10,
+        "use_lcc": true,
+        "seed": 3735928559
+    },
+    "extract_claims": {
+        "enabled": false,
+        "model_id": "default_chat_model",
+        "prompt": "prompts/extract_claims.txt",
+        "description": "Any claims or facts that could be relevant to information discovery.",
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "community_reports": {
+        "model_id": "default_chat_model",
+        "graph_prompt": "prompts/community_report_graph.txt",
+        "text_prompt": "prompts/community_report_text.txt",
+        "max_length": 2000,
+        "max_input_length": 8000,
+        "strategy": null
+    },
+    "embed_graph": {
+        "enabled": false,
+        "dimensions": 1536,
+        "num_walks": 10,
+        "walk_length": 40,
+        "window_size": 2,
+        "iterations": 3,
+        "random_seed": 597832,
+        "use_lcc": true
+    },
+    "umap": {
+        "enabled": false
+    },
+    "snapshots": {
+        "embeddings": false,
+        "graphml": false,
+        "raw_graph": false
+    },
+    "local_search": {
+        "prompt": "prompts/local_search_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "text_unit_prop": 0.5,
+        "community_prop": 0.15,
+        "conversation_history_max_turns": 5,
+        "top_k_entities": 10,
+        "top_k_relationships": 10,
+        "max_context_tokens": 12000
+    },
+    "global_search": {
+        "map_prompt": "prompts/global_search_map_system_prompt.txt",
+        "reduce_prompt": "prompts/global_search_reduce_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "knowledge_prompt": "prompts/global_search_knowledge_system_prompt.txt",
+        "max_context_tokens": 12000,
+        "data_max_tokens": 12000,
+        "map_max_length": 1000,
+        "reduce_max_length": 2000,
+        "dynamic_search_threshold": 1,
+        "dynamic_search_keep_parent": false,
+        "dynamic_search_num_repeats": 1,
+        "dynamic_search_use_summary": false,
+        "dynamic_search_max_level": 2
+    },
+    "drift_search": {
+        "prompt": "prompts/drift_search_system_prompt.txt",
+        "reduce_prompt": "prompts/drift_search_reduce_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "data_max_tokens": 12000,
+        "reduce_max_tokens": null,
+        "reduce_temperature": 0,
+        "reduce_max_completion_tokens": null,
+        "concurrency": 32,
+        "drift_k_followups": 20,
+        "primer_folds": 5,
+        "primer_llm_max_tokens": 12000,
+        "n_depth": 3,
+        "local_search_text_unit_prop": 0.9,
+        "local_search_community_prop": 0.1,
+        "local_search_top_k_mapped_entities": 10,
+        "local_search_top_k_relationships": 10,
+        "local_search_max_data_tokens": 12000,
+        "local_search_temperature": 0,
+        "local_search_top_p": 1,
+        "local_search_n": 1,
+        "local_search_llm_max_gen_tokens": null,
+        "local_search_llm_max_gen_completion_tokens": null
+    },
+    "basic_search": {
+        "prompt": "prompts/basic_search_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "k": 10,
+        "max_context_tokens": 12000
+    }
+}
+2026-01-15 13:39:24.0291 - INFO - graphrag.api.index - Initializing indexing pipeline...
+2026-01-15 13:39:24.0291 - INFO - graphrag.index.workflows.factory - Creating pipeline with workflows: ['load_input_documents', 'create_base_text_units', 'create_final_documents', 'extract_graph', 'finalize_graph', 'extract_covariates', 'create_communities', 'create_final_text_units', 'create_community_reports', 'generate_text_embeddings']
+2026-01-15 13:39:24.0292 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\input
+2026-01-15 13:39:24.0292 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\output
+2026-01-15 13:39:24.0292 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest
+2026-01-15 13:39:24.0293 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\cache
+2026-01-15 13:39:24.0294 - INFO - graphrag.index.run.run_pipeline - Running standard indexing.
+2026-01-15 13:39:24.0294 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at 
+2026-01-15 13:39:24.0297 - INFO - graphrag.index.run.run_pipeline - Executing pipeline...
+2026-01-15 13:39:24.0297 - INFO - graphrag.index.input.factory - loading input from root_dir=C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\input
+2026-01-15 13:39:24.0297 - INFO - graphrag.index.input.factory - Loading Input InputFileType.text
+2026-01-15 13:39:24.0297 - INFO - graphrag.storage.file_pipeline_storage - search C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\input for files matching .*\.txt$
+2026-01-15 13:39:24.0298 - DEBUG - graphrag.storage.file_pipeline_storage - Files loaded: 1, filtered: 0, total: 1
+2026-01-15 13:39:24.0299 - INFO - graphrag.index.input.util - Found 1 InputFileType.text files, loading 1
+2026-01-15 13:39:24.0300 - INFO - graphrag.index.input.util - Total number of unfiltered InputFileType.text rows: 1
+2026-01-15 13:39:24.0300 - INFO - graphrag.index.workflows.load_input_documents - Final # of rows loaded: 1
+2026-01-15 13:39:24.0311 - INFO - graphrag.api.index - Workflow load_input_documents completed successfully
+2026-01-15 13:39:24.0315 - DEBUG - graphrag.api.index -                                                 text  ...              creation_date
+0  *** INTERNES MEMO: SOFTWARE-ARCHITEKTUR ***\nD...  ...  2026-01-15 13:15:32 +0100
+
+[1 rows x 4 columns]
+2026-01-15 13:39:24.0315 - INFO - graphrag.index.workflows.create_base_text_units - Workflow started: create_base_text_units
+2026-01-15 13:39:24.0316 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2026-01-15 13:39:24.0323 - INFO - graphrag.index.workflows.create_base_text_units - Starting chunking process for 1 documents
+2026-01-15 13:39:24.0325 - INFO - graphrag.index.workflows.create_base_text_units - chunker progress:  1/1
+2026-01-15 13:39:24.0331 - INFO - graphrag.index.workflows.create_base_text_units - Workflow completed: create_base_text_units
+2026-01-15 13:39:24.0336 - INFO - graphrag.api.index - Workflow create_base_text_units completed successfully
+2026-01-15 13:39:24.0340 - DEBUG - graphrag.api.index -                                                   id  ... n_tokens
+0  0e3879a04bad673f125a7337c96d48c28d1370944fb50f...  ...      344
+
+[1 rows x 4 columns]
+2026-01-15 13:39:24.0340 - INFO - graphrag.index.workflows.create_final_documents - Workflow started: create_final_documents
+2026-01-15 13:39:24.0340 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2026-01-15 13:39:24.0343 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2026-01-15 13:39:24.0356 - INFO - graphrag.index.workflows.create_final_documents - Workflow completed: create_final_documents
+2026-01-15 13:39:24.0361 - INFO - graphrag.api.index - Workflow create_final_documents completed successfully
+2026-01-15 13:39:24.0365 - DEBUG - graphrag.api.index -                                                   id  ...  metadata
+0  c88189245edcd546d921c32e4eb41817eb6367e7dbf608...  ...       NaN
+
+[1 rows x 7 columns]
+2026-01-15 13:39:24.0366 - INFO - graphrag.index.workflows.extract_graph - Workflow started: extract_graph
+2026-01-15 13:39:24.0366 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2026-01-15 13:39:24.0370 - DEBUG - graphrag.index.operations.extract_graph.extract_graph - entity_extract strategy={'type': "graph_intelligence", 'llm': {'api_key': 'ollama', 'auth_type': <AuthType.APIKey: 'api_key'>, 'type': 'chat', 'model_provider': 'openai', 'model': 'llama3:8b', 'encoding_model': '', 'api_base': 'http://localhost:11434/v1', 'api_version': None, 'deployment_name': None, 'organization': None, 'proxy': None, 'audience': None, 'model_supports_json': False, 'request_timeout': 180.0, 'tokens_per_minute': 100000, 'requests_per_minute': 20, 'rate_limit_strategy': 'static', 'retry_strategy': 'exponential_backoff', 'max_retries': 10, 'max_retry_wait': 10.0, 'concurrent_requests': 1, 'async_mode': <AsyncType.Threaded: 'threaded'>, 'responses': None, 'max_tokens': None, 'temperature': 0, 'max_completion_tokens': None, 'reasoning_effort': None, 'top_p': 1, 'n': 1, 'frequency_penalty': 0.0, 'presence_penalty': 0.0}, 'extraction_prompt': '-Goal-\nGiven a text document and a list of entity types, identify all entities of those types from the text and all relationships among them.\n\n-Steps-\n1. Identify all entities. For each entity, extract:\n- entity_name: Name of the entity, capitalized\n- entity_type: One of the following types: [{entity_types}]\n- entity_description: Comprehensive description of the entity\'s attributes and activities\nFormat: ("entity", "entity_name", "entity_type", "entity_description")\n\n2. From the entities identified in step 1, identify all relationships. For each relationship, extract:\n- source_entity: name of the source entity\n- target_entity: name of the target entity\n- relationship_description: explanation as to why they are related\n- relationship_strength: a numeric score (1-10)\nFormat: ("relationship", "source_entity", "target_entity", "relationship_description", relationship_strength)\n\n3. Output as a single list. NEVER add explanations. ONLY output the tuples.\n\n-Examples-\nExample 1:\nText:\nMicrosoft was founded by Bill Gates and Paul Allen. They launched Windows in 1985.\nOutput:\n("entity", "Microsoft", "ORGANIZATION", "A technology company founded by Bill Gates and Paul Allen.")\n("entity", "Bill Gates", "PERSON", "Co-founder of Microsoft.")\n("entity", "Paul Allen", "PERSON", "Co-founder of Microsoft.")\n("entity", "Windows", "PRODUCT", "Operating system launched by Microsoft in 1985.")\n("relationship", "Bill Gates", "Microsoft", "Co-founder of the company.", 10)\n("relationship", "Paul Allen", "Microsoft", "Co-founder of the company.", 10)\n("relationship", "Microsoft", "Windows", "Launched the product.", 8)\n\n-Real Data-\nEntity_types: {entity_types}\nText: {input_text}\nOutput:', 'max_gleanings': 1}
+2026-01-15 13:39:24.0374 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\cache\extract_graph
+2026-01-15 13:39:34.0167 - INFO - graphrag.logger.progress - extract graph progress: 1/1
+2026-01-15 13:39:34.0167 - ERROR - graphrag.index.run.run_pipeline - error running workflow extract_graph
+Traceback (most recent call last):
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\run\run_pipeline.py", line 121, in _run_pipeline
+    result = await workflow_function(config, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\workflows\extract_graph.py", line 50, in run_workflow
+    entities, relationships, raw_entities, raw_relationships = await extract_graph(
+                                                               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\workflows\extract_graph.py", line 95, in extract_graph
+    extracted_entities, extracted_relationships = await extractor(
+                                                  ^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\operations\extract_graph\extract_graph.py", line 79, in extract_graph
+    entities = _merge_entities(entity_dfs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\operations\extract_graph\extract_graph.py", line 103, in _merge_entities
+    all_entities.groupby(["title", "type"], sort=False)
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\pandas\core\frame.py", line 9210, in groupby
+    return DataFrameGroupBy(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1331, in __init__
+    grouper, exclusions, obj = get_grouper(
+                               ^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\pandas\core\groupby\grouper.py", line 1043, in get_grouper
+    raise KeyError(gpr)
+KeyError: 'title'
+2026-01-15 13:39:34.0172 - ERROR - graphrag.api.index - Workflow extract_graph completed with errors
+2026-01-15 13:39:34.0172 - DEBUG - graphrag.api.index - None
+2026-01-15 13:39:34.0173 - ERROR - graphrag.cli.index - Errors occurred during the pipeline run, see logs for more details.
+2026-01-15 13:52:08.0223 - INFO - graphrag.index.validate_config - LLM Config Params Validated
+2026-01-15 13:52:09.0455 - INFO - graphrag.index.validate_config - Embedding LLM Config Params Validated
+2026-01-15 13:52:09.0455 - INFO - graphrag.cli.index - Starting pipeline run. False
+2026-01-15 13:52:09.0456 - INFO - graphrag.cli.index - Using default configuration: {
+    "root_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest",
+    "models": {
+        "default_chat_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "chat",
+            "model_provider": "openai",
+            "model": "llama3:8b",
+            "encoding_model": "",
+            "api_base": "http://localhost:11434/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": false,
+            "request_timeout": 180.0,
+            "tokens_per_minute": 100000,
+            "requests_per_minute": 20,
+            "rate_limit_strategy": "static",
+            "retry_strategy": "exponential_backoff",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 1,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": null,
+            "temperature": 0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        },
+        "default_embedding_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "embedding",
+            "model_provider": "openai",
+            "model": "mxbai-embed-large:latest",
+            "encoding_model": "",
+            "api_base": "http://localhost:11434/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": null,
+            "request_timeout": 180.0,
+            "tokens_per_minute": 100000,
+            "requests_per_minute": 20,
+            "rate_limit_strategy": "static",
+            "retry_strategy": "exponential_backoff",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 1,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": null,
+            "temperature": 0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        }
+    },
+    "input": {
+        "storage": {
+            "type": "file",
+            "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\input",
+            "storage_account_blob_url": null,
+            "cosmosdb_account_url": null
+        },
+        "file_type": "text",
+        "encoding": "utf-8",
+        "file_pattern": ".*\\.txt$",
+        "file_filter": null,
+        "text_column": "text",
+        "title_column": null,
+        "metadata": null
+    },
+    "chunks": {
+        "size": 1200,
+        "overlap": 100,
+        "group_by_columns": [
+            "id"
+        ],
+        "strategy": "tokens",
+        "encoding_model": "cl100k_base",
+        "prepend_metadata": false,
+        "chunk_size_includes_metadata": false
+    },
+    "output": {
+        "type": "file",
+        "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "outputs": null,
+    "update_index_output": {
+        "type": "file",
+        "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\update_output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "cache": {
+        "type": "file",
+        "base_dir": "cache",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "reporting": {
+        "type": "file",
+        "base_dir": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\logs",
+        "storage_account_blob_url": null
+    },
+    "vector_store": {
+        "default_vector_store": {
+            "type": "lancedb",
+            "db_uri": "C:\\Users\\kachb\\Desktop\\Hochschule Esslingen\\KI_AG_GraphRag\\ragtest\\output\\lancedb",
+            "url": null,
+            "audience": null,
+            "container_name": "==== REDACTED ====",
+            "database_name": null,
+            "overwrite": true,
+            "embeddings_schema": {}
+        }
+    },
+    "workflows": null,
+    "embed_text": {
+        "model_id": "default_embedding_model",
+        "vector_store_id": "default_vector_store",
+        "batch_size": 16,
+        "batch_max_tokens": 8191,
+        "names": [
+            "entity.description",
+            "community.full_content",
+            "text_unit.text"
+        ],
+        "strategy": null
+    },
+    "extract_graph": {
+        "model_id": "default_chat_model",
+        "prompt": "prompts/extract_graph.txt",
+        "entity_types": [
+            "organization",
+            "person",
+            "geo",
+            "event"
+        ],
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "summarize_descriptions": {
+        "model_id": "default_chat_model",
+        "prompt": "prompts/summarize_descriptions.txt",
+        "max_length": 500,
+        "max_input_tokens": 4000,
+        "strategy": null
+    },
+    "extract_graph_nlp": {
+        "normalize_edge_weights": true,
+        "text_analyzer": {
+            "extractor_type": "regex_english",
+            "model_name": "en_core_web_md",
+            "max_word_length": 15,
+            "word_delimiter": " ",
+            "include_named_entities": true,
+            "exclude_nouns": [
+                "stuff",
+                "thing",
+                "things",
+                "bunch",
+                "bit",
+                "bits",
+                "people",
+                "person",
+                "okay",
+                "hey",
+                "hi",
+                "hello",
+                "laughter",
+                "oh"
+            ],
+            "exclude_entity_tags": [
+                "DATE"
+            ],
+            "exclude_pos_tags": [
+                "DET",
+                "PRON",
+                "INTJ",
+                "X"
+            ],
+            "noun_phrase_tags": [
+                "PROPN",
+                "NOUNS"
+            ],
+            "noun_phrase_grammars": {
+                "PROPN,PROPN": "PROPN",
+                "NOUN,NOUN": "NOUNS",
+                "NOUNS,NOUN": "NOUNS",
+                "ADJ,ADJ": "ADJ",
+                "ADJ,NOUN": "NOUNS"
+            }
+        },
+        "concurrent_requests": 25,
+        "async_mode": "threaded"
+    },
+    "prune_graph": {
+        "min_node_freq": 2,
+        "max_node_freq_std": null,
+        "min_node_degree": 1,
+        "max_node_degree_std": null,
+        "min_edge_weight_pct": 40.0,
+        "remove_ego_nodes": true,
+        "lcc_only": false
+    },
+    "cluster_graph": {
+        "max_cluster_size": 10,
+        "use_lcc": true,
+        "seed": 3735928559
+    },
+    "extract_claims": {
+        "enabled": false,
+        "model_id": "default_chat_model",
+        "prompt": "prompts/extract_claims.txt",
+        "description": "Any claims or facts that could be relevant to information discovery.",
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "community_reports": {
+        "model_id": "default_chat_model",
+        "graph_prompt": "prompts/community_report_graph.txt",
+        "text_prompt": "prompts/community_report_text.txt",
+        "max_length": 2000,
+        "max_input_length": 8000,
+        "strategy": null
+    },
+    "embed_graph": {
+        "enabled": false,
+        "dimensions": 1536,
+        "num_walks": 10,
+        "walk_length": 40,
+        "window_size": 2,
+        "iterations": 3,
+        "random_seed": 597832,
+        "use_lcc": true
+    },
+    "umap": {
+        "enabled": false
+    },
+    "snapshots": {
+        "embeddings": false,
+        "graphml": false,
+        "raw_graph": false
+    },
+    "local_search": {
+        "prompt": "prompts/local_search_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "text_unit_prop": 0.5,
+        "community_prop": 0.15,
+        "conversation_history_max_turns": 5,
+        "top_k_entities": 10,
+        "top_k_relationships": 10,
+        "max_context_tokens": 12000
+    },
+    "global_search": {
+        "map_prompt": "prompts/global_search_map_system_prompt.txt",
+        "reduce_prompt": "prompts/global_search_reduce_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "knowledge_prompt": "prompts/global_search_knowledge_system_prompt.txt",
+        "max_context_tokens": 12000,
+        "data_max_tokens": 12000,
+        "map_max_length": 1000,
+        "reduce_max_length": 2000,
+        "dynamic_search_threshold": 1,
+        "dynamic_search_keep_parent": false,
+        "dynamic_search_num_repeats": 1,
+        "dynamic_search_use_summary": false,
+        "dynamic_search_max_level": 2
+    },
+    "drift_search": {
+        "prompt": "prompts/drift_search_system_prompt.txt",
+        "reduce_prompt": "prompts/drift_search_reduce_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "data_max_tokens": 12000,
+        "reduce_max_tokens": null,
+        "reduce_temperature": 0,
+        "reduce_max_completion_tokens": null,
+        "concurrency": 32,
+        "drift_k_followups": 20,
+        "primer_folds": 5,
+        "primer_llm_max_tokens": 12000,
+        "n_depth": 3,
+        "local_search_text_unit_prop": 0.9,
+        "local_search_community_prop": 0.1,
+        "local_search_top_k_mapped_entities": 10,
+        "local_search_top_k_relationships": 10,
+        "local_search_max_data_tokens": 12000,
+        "local_search_temperature": 0,
+        "local_search_top_p": 1,
+        "local_search_n": 1,
+        "local_search_llm_max_gen_tokens": null,
+        "local_search_llm_max_gen_completion_tokens": null
+    },
+    "basic_search": {
+        "prompt": "prompts/basic_search_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "k": 10,
+        "max_context_tokens": 12000
+    }
+}
+2026-01-15 13:52:09.0457 - INFO - graphrag.api.index - Initializing indexing pipeline...
+2026-01-15 13:52:09.0457 - INFO - graphrag.index.workflows.factory - Creating pipeline with workflows: ['load_input_documents', 'create_base_text_units', 'create_final_documents', 'extract_graph', 'finalize_graph', 'extract_covariates', 'create_communities', 'create_final_text_units', 'create_community_reports', 'generate_text_embeddings']
+2026-01-15 13:52:09.0458 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\input
+2026-01-15 13:52:09.0458 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\output
+2026-01-15 13:52:09.0458 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest
+2026-01-15 13:52:09.0459 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\cache
+2026-01-15 13:52:09.0460 - INFO - graphrag.index.run.run_pipeline - Running standard indexing.
+2026-01-15 13:52:09.0460 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at 
+2026-01-15 13:52:09.0462 - INFO - graphrag.index.run.run_pipeline - Executing pipeline...
+2026-01-15 13:52:09.0462 - INFO - graphrag.index.input.factory - loading input from root_dir=C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\input
+2026-01-15 13:52:09.0462 - INFO - graphrag.index.input.factory - Loading Input InputFileType.text
+2026-01-15 13:52:09.0463 - INFO - graphrag.storage.file_pipeline_storage - search C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\input for files matching .*\.txt$
+2026-01-15 13:52:09.0463 - DEBUG - graphrag.storage.file_pipeline_storage - Files loaded: 1, filtered: 0, total: 1
+2026-01-15 13:52:09.0465 - INFO - graphrag.index.input.util - Found 1 InputFileType.text files, loading 1
+2026-01-15 13:52:09.0465 - INFO - graphrag.index.input.util - Total number of unfiltered InputFileType.text rows: 1
+2026-01-15 13:52:09.0465 - INFO - graphrag.index.workflows.load_input_documents - Final # of rows loaded: 1
+2026-01-15 13:52:09.0478 - INFO - graphrag.api.index - Workflow load_input_documents completed successfully
+2026-01-15 13:52:09.0484 - DEBUG - graphrag.api.index -                                                 text  ...              creation_date
+0  *** INTERNES MEMO: SOFTWARE-ARCHITEKTUR ***\nD...  ...  2026-01-15 13:15:32 +0100
+
+[1 rows x 4 columns]
+2026-01-15 13:52:09.0484 - INFO - graphrag.index.workflows.create_base_text_units - Workflow started: create_base_text_units
+2026-01-15 13:52:09.0484 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2026-01-15 13:52:09.0492 - INFO - graphrag.index.workflows.create_base_text_units - Starting chunking process for 1 documents
+2026-01-15 13:52:09.0495 - INFO - graphrag.index.workflows.create_base_text_units - chunker progress:  1/1
+2026-01-15 13:52:09.0501 - INFO - graphrag.index.workflows.create_base_text_units - Workflow completed: create_base_text_units
+2026-01-15 13:52:09.0505 - INFO - graphrag.api.index - Workflow create_base_text_units completed successfully
+2026-01-15 13:52:09.0509 - DEBUG - graphrag.api.index -                                                   id  ... n_tokens
+0  0e3879a04bad673f125a7337c96d48c28d1370944fb50f...  ...      344
+
+[1 rows x 4 columns]
+2026-01-15 13:52:09.0509 - INFO - graphrag.index.workflows.create_final_documents - Workflow started: create_final_documents
+2026-01-15 13:52:09.0509 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2026-01-15 13:52:09.0513 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2026-01-15 13:52:09.0525 - INFO - graphrag.index.workflows.create_final_documents - Workflow completed: create_final_documents
+2026-01-15 13:52:09.0530 - INFO - graphrag.api.index - Workflow create_final_documents completed successfully
+2026-01-15 13:52:09.0535 - DEBUG - graphrag.api.index -                                                   id  ...  metadata
+0  c88189245edcd546d921c32e4eb41817eb6367e7dbf608...  ...       NaN
+
+[1 rows x 7 columns]
+2026-01-15 13:52:09.0535 - INFO - graphrag.index.workflows.extract_graph - Workflow started: extract_graph
+2026-01-15 13:52:09.0535 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2026-01-15 13:52:09.0539 - DEBUG - graphrag.index.operations.extract_graph.extract_graph - entity_extract strategy={'type': "graph_intelligence", 'llm': {'api_key': 'ollama', 'auth_type': <AuthType.APIKey: 'api_key'>, 'type': 'chat', 'model_provider': 'openai', 'model': 'llama3:8b', 'encoding_model': '', 'api_base': 'http://localhost:11434/v1', 'api_version': None, 'deployment_name': None, 'organization': None, 'proxy': None, 'audience': None, 'model_supports_json': False, 'request_timeout': 180.0, 'tokens_per_minute': 100000, 'requests_per_minute': 20, 'rate_limit_strategy': 'static', 'retry_strategy': 'exponential_backoff', 'max_retries': 10, 'max_retry_wait': 10.0, 'concurrent_requests': 1, 'async_mode': <AsyncType.Threaded: 'threaded'>, 'responses': None, 'max_tokens': None, 'temperature': 0, 'max_completion_tokens': None, 'reasoning_effort': None, 'top_p': 1, 'n': 1, 'frequency_penalty': 0.0, 'presence_penalty': 0.0}, 'extraction_prompt': '-Goal-\nGiven a text document and a list of entity types, identify all entities of those types from the text and all relationships among them.\n\n-Steps-\n1. Identify all entities. For each entity, extract:\n- entity_name: Name of the entity, capitalized\n- entity_type: One of the following types: [{entity_types}]\n- entity_description: Comprehensive description of the entity\'s attributes and activities\nFormat: ("entity", "entity_name", "entity_type", "entity_description")\n\n2. From the entities identified in step 1, identify all relationships. For each relationship, extract:\n- source_entity: name of the source entity\n- target_entity: name of the target entity\n- relationship_description: explanation as to why they are related\n- relationship_strength: a numeric score (1-10)\nFormat: ("relationship", "source_entity", "target_entity", "relationship_description", relationship_strength)\n\n3. Output as a single list. NEVER add explanations. ONLY output the tuples.\n\n-Examples-\nExample 1:\nText:\nMicrosoft was founded by Bill Gates and Paul Allen. They launched Windows in 1985.\nOutput:\n("entity", "Microsoft", "ORGANIZATION", "A technology company founded by Bill Gates and Paul Allen.")\n("entity", "Bill Gates", "PERSON", "Co-founder of Microsoft.")\n("entity", "Paul Allen", "PERSON", "Co-founder of Microsoft.")\n("entity", "Windows", "PRODUCT", "Operating system launched by Microsoft in 1985.")\n("relationship", "Bill Gates", "Microsoft", "Co-founder of the company.", 10)\n("relationship", "Paul Allen", "Microsoft", "Co-founder of the company.", 10)\n("relationship", "Microsoft", "Windows", "Launched the product.", 8)\n\n-Real Data-\nEntity_types: {entity_types}\nText: {input_text}\nOutput:', 'max_gleanings': 1}
+2026-01-15 13:52:09.0542 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\ragtest\cache\extract_graph
+2026-01-15 13:52:19.0034 - INFO - graphrag.logger.progress - extract graph progress: 1/1
+2026-01-15 13:52:19.0034 - ERROR - graphrag.index.run.run_pipeline - error running workflow extract_graph
+Traceback (most recent call last):
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\run\run_pipeline.py", line 121, in _run_pipeline
+    result = await workflow_function(config, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\workflows\extract_graph.py", line 50, in run_workflow
+    entities, relationships, raw_entities, raw_relationships = await extract_graph(
+                                                               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\workflows\extract_graph.py", line 95, in extract_graph
+    extracted_entities, extracted_relationships = await extractor(
+                                                  ^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\operations\extract_graph\extract_graph.py", line 79, in extract_graph
+    entities = _merge_entities(entity_dfs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\graphrag\index\operations\extract_graph\extract_graph.py", line 103, in _merge_entities
+    all_entities.groupby(["title", "type"], sort=False)
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\pandas\core\frame.py", line 9210, in groupby
+    return DataFrameGroupBy(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1331, in __init__
+    grouper, exclusions, obj = get_grouper(
+                               ^^^^^^^^^^^^
+  File "C:\Users\kachb\Desktop\Hochschule Esslingen\KI_AG_GraphRag\.venv\Lib\site-packages\pandas\core\groupby\grouper.py", line 1043, in get_grouper
+    raise KeyError(gpr)
+KeyError: 'title'
+2026-01-15 13:52:19.0038 - ERROR - graphrag.api.index - Workflow extract_graph completed with errors
+2026-01-15 13:52:19.0038 - DEBUG - graphrag.api.index - None
+2026-01-15 13:52:19.0040 - ERROR - graphrag.cli.index - Errors occurred during the pipeline run, see logs for more details.
